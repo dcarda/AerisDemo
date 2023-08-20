@@ -2,8 +2,16 @@
  * Class:  com.aeris.test.aerisdemo.trival.HeavyLifter.java
  * Date:   2023/08/20
  * ---------------------------------------------------------------------------------------
+ *
+ * Copyright, (c) 2020 - Carda Technologies, LLC
+ * All rights reserved.
  */
 
+/*---------------------------------------------------------------------------------------
+* Class:  com.aeris.test.aerisdemo.trival.HeavyLifter.java
+* Date:   2023/08/20
+* ---------------------------------------------------------------------------------------
+ */
 package com.aeris.test.aerisdemo.trival;
 
 /**
@@ -14,11 +22,11 @@ package com.aeris.test.aerisdemo.trival;
  * @author     Daniel Carda
  *
  * Maintenance History:
-<p><pre>
+  <p><pre>
     yyyy mm dd  Who               Description
     ----------  ----------------  ----------------------------------------------------
     2023/08/20  JavaDan           Initial Module Creation...
-</pre>
+  </pre>
  *
  */
 public class HeavyLifter {
@@ -27,11 +35,21 @@ public class HeavyLifter {
      * Method: getData
      *
      * @return String
+     *
+     * @param timeIndex
+     *        The time index value
+     * @param zIndex
+     *        The Z-Index value.
      */
-    public String getData() {
+    public String getData( String timeIndex,
+                           String zIndex ) {
         String returnStr;
 
-        //
+        // Diagnostic:  Print out the values.
+        System.out.println( "getData : timeIndex=" + timeIndex );
+        System.out.println( "getData : zIndex=" + zIndex );
+
+        // Return the results
         returnStr = "   HeavyLifter : getData";
 
         // Return the response
@@ -41,12 +59,22 @@ public class HeavyLifter {
     /**
      * Method: getImage
      *
+     * @param timeIndex
+     *        The time index value
+     * @param zIndex
+     *        The Z-Index value.
+     *
      * @return String
+
      */
-    public String getImage() {
+    public String getImage(String timeIndex, String zIndex) {
         String returnStr;
 
-        //
+        // Diagnostic:  Print out the values.
+        System.out.println( "getData : timeIndex=" + timeIndex );
+        System.out.println( "getData : zIndex=" + zIndex );
+
+        // Return the results
         returnStr = "   HeavyLifter : getImage";
 
         // Return the response
@@ -73,3 +101,4 @@ public class HeavyLifter {
  * Class:  com.aeris.test.aerisdemo.trival.HeavyLifter.java
  * Date:   2023/08/20
  * --------------------------------------------------------------------------------------- */
+
