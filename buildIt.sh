@@ -101,7 +101,7 @@ function build_JarArtifact() {
     fi
 
     # Display information about the artifact.
-    #  display_ArtifactInformation
+    display_ArtifactInformation
 } # ---  End Function build_JarArtifact()
 
 #===  FUNCTION   ================================================
@@ -225,7 +225,7 @@ function display_ArtifactInformation() {
     echo "File Information: "
     cd target/
     echo "  "
-    ls -l  CogEngine-*.jar
+    ls -l  AerisDemoProgram*.jar
     cd ..
 
     #  Time to print out the manifest information.
@@ -236,7 +236,7 @@ function display_ArtifactInformation() {
     echo
 
     cd target/
-    unzip -p CogEngine-*.jar META-INF/MANIFEST.MF >file.txt
+    unzip -p AerisDemoProgram*.jar META-INF/MANIFEST.MF >file.txt
     tail -37 file.txt
 }  # ---  End Function display_ArtifactInformation()
 
@@ -434,6 +434,11 @@ else
 
     elif [ $1 == "resolve" ]; then
         resolve_dependencies
+        # End the program
+        terminationNormal
+
+    elif [ $1 == "info" ]; then
+        display_ArtifactInformation
         # End the program
         terminationNormal
 
