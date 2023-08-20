@@ -16,8 +16,29 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <java.jdk.version>11</java.jdk.version>
+
+        <!--  Compiler Settings  ================================================  -->
+        <java.source.level>11</java.source.level>
+        <java.target.level>11</java.target.level>
+
         <java.version>11</java.version>
+        <javacDebug>true</javacDebug>
+        <javacDebugLevel>lines,vars,source</javacDebugLevel>
+        <javacFork>false</javacFork>
+        <javacOptimize>false</javacOptimize>
+        <javacVerbose>true</javacVerbose>
+
+        <!-- This is for the Manifest.mf files                                     -->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <version.compiler.plugin>3.11.0</version.compiler.plugin>
+        <version.git.commit.id.plugin>4.9.10</version.git.commit.id.plugin>
+
+        <!-- Miscellaneous Plugins                                                 -->
+        <version.jar.plugin>3.3.0</version.jar.plugin>
         <version.netcdfJavaVersion>5.2.0</version.netcdfJavaVersion>
+
     </properties>
 
     <dependencies>
@@ -53,6 +74,143 @@
     <build>
         <finalName>AerisDemoProgram</finalName>
         <plugins>
+
+            <!--   Java Compiler    ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙  -->
+            <!--   https://maven.apache.org/plugins/maven-compiler-plugin/index.html   -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <debug>${javacDebug}</debug>
+                    <debuglevel>${javacDebugLevel}</debuglevel>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <fork>${javacFork}</fork>
+
+                    <verbose>${javacVerbose}</verbose>
+                    <compilerVersion>${java.jdk.version}</compilerVersion>
+                    <source>${java.source.level}</source>
+                    <target>${java.target.level}</target>
+
+                    <showDeprecation>false</showDeprecation>
+                    <optimize>${javacOptimize}</optimize>
+                    <compilerArgs>
+                        <arg>-Xlint:classfile</arg>
+
+                        <arg>-Xlint:all</arg>
+                        <!-- Override options warnings to support cross-compilation -->
+                        <arg>-Xlint:-options</arg>
+                        <!-- Temporary lint overrides, to be removed over time. -->
+                        <arg>-Xlint:-cast</arg>
+                        <arg>-Xlint:-deprecation</arg>
+                        <arg>-Xlint:-processing</arg>
+                        <arg>-Xlint:-rawtypes</arg>
+                        <arg>-Xlint:-serial</arg>
+                        <arg>-Xlint:-try</arg>
+                        <arg>-Xlint:-unchecked</arg>
+                        <arg>-Xlint:-varargs</arg>
+                        <!-- Uncomment the following args to display more warnings. -->
+                        <!-- -Xmaxwarns -->
+                        <!-- 10000 -->
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
+            <!--   Jar  Plugin   ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙  -->
+            <!--   https://maven.apache.org/plugins/maven-install-plugin/                  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${version.jar.plugin}</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <compress>true</compress>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifest>
+                            <!-- ====================================================  -->
+                            <!--  Manifest Information   ============================  -->
+                            <addClasspath>true</addClasspath>
+                            <!--                            <classpathLayoutType>custom</classpathLayoutType>-->
+                            <!--                            <customClasspathLayout>${line.separator}./lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>-->
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestSections>
+                            <!-- ====================================================  -->
+                            <!--  Ownership Information   ===========================  -->
+                            <manifestSection>
+                                <name>OWNERSHIP INFORMATION</name>
+                                <manifestEntries>
+                                    <Copyright>None</Copyright>
+                                    <Rights>No Right Reserved</Rights>
+                                    <Organization-Name>${project.organization.name}</Organization-Name>
+                                    <Country>United States of America</Country>
+                                </manifestEntries>
+                            </manifestSection>
+                            <!-- ===================================================  -->
+                            <!--  Build Intelligence   =============================  -->
+                            <manifestSection>
+                                <name>BUILD INTELLIGENCE</name>
+                                <manifestEntries>
+                                    <Project-Name>${project.name}</Project-Name>
+                                    <Machine-OS>${os.name} ${os.arch} ${os.version}</Machine-OS>
+                                    <Built-By>${user.name}</Built-By>
+                                    <Build-Time>${timestamp}</Build-Time>
+                                </manifestEntries>
+                            </manifestSection>
+                            <!-- ====================================================  -->
+                            <!--  Java Information   ================================  -->
+                            <manifestSection>
+                                <name>JAVA INFORMATION</name>
+                                <manifestEntries>
+                                    <Build-JDK>${java.source.level} (${java.vendor} ${java.vm.version})</Build-JDK>
+                                    <Java-Home>${java.home}</Java-Home>
+                                    <Source_Level>${java.source.level}</Source_Level>
+                                    <Output_Level>${java.jdk.version}</Output_Level>
+                                    <Optimized>false</Optimized>
+                                    <encoding>${project.build.sourceEncoding}</encoding>
+                                </manifestEntries>
+                            </manifestSection>
+                            <!-- ====================================================  -->
+                            <!--  Maven Information   ===============================  -->
+                            <manifestSection>
+                                <name>MAVEN INFORMATION</name>
+                                <manifestEntries>
+                                    <Maven-Version>${maven.version}</Maven-Version>
+                                    <Artifact-Id>${project.artifactId}</Artifact-Id>
+                                    <Group-Id>${project.groupId}</Group-Id>
+                                    <Version>${project.version}</Version>
+                                    <Packaging>${project.packaging}</Packaging>
+                                    <Maven-Version>${maven.version}</Maven-Version>
+                                </manifestEntries>
+                            </manifestSection>
+                            <!-- ====================================================  -->
+                            <!--  SCM Information   =================================  -->
+                            <manifestSection>
+                                <name>SCM INFORMATION</name>
+                                <manifestEntries>
+                                    <SCM-Branch>${git.branch}</SCM-Branch>
+                                    <SCM-Commit-id>${git.commit.id}</SCM-Commit-id>
+                                    <SCM-Commit-id-Abbr>${git.commit.id.abbrev}</SCM-Commit-id-Abbr>
+                                    <SCM-Last-Commit-Time>${git.commit.time}</SCM-Last-Commit-Time>
+                                    <SCM-Last-Checkin-User>${git.commit.user.name}</SCM-Last-Checkin-User>
+                                </manifestEntries>
+                            </manifestSection>
+                            <!-- ====================================================  -->
+                            <!--  Host Information   ================================  -->
+                            <manifestSection>
+                                <name>HOST INFORMATION</name>
+                                <manifestEntries>
+                                    <hostname>${env.HOSTNAME}</hostname>
+                                </manifestEntries>
+                            </manifestSection>
+                            <!-- ====================================================  -->
+                        </manifestSections>
+                        <manifestEntries/>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -60,6 +218,37 @@
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
+            </plugin>
+
+            <!--   GIT Commit Plugin Plugin   ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙  -->
+            <!--   https://github.com/git-commit-id/git-commit-id-maven-plugin             -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${version.git.commit.id.plugin}</version>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <prefix>git</prefix>
+                    <verbose>false</verbose>
+                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                    <!--
+                         <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    -->
+                    <format>json</format>
+                    <gitDescribe>
+                        <skip>false</skip>
+                        <always>true</always>
+                        <dirty>-dirty</dirty>
+                    </gitDescribe>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
