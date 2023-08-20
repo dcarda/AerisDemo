@@ -1,15 +1,16 @@
-/* ---------------------------------------------------------------------------------------
+/*---------------------------------------------------------------------------------------
  * Class:  com.aeris.test.aerisdemo.controller.LandingPadController.java
  * Date:   2023/08/20
  * ---------------------------------------------------------------------------------------
  */
-
 package com.aeris.test.aerisdemo.controller;
 
 //~--- non-JDK imports --------------------------------------------------------
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.aeris.test.aerisdemo.trival.HeavyLifter;
 
 /**
  * Package:    com.aeris.test.aerisdemo.controller
@@ -19,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @author     Daniel Carda
  *
  * Maintenance History:
-<p><pre>
-   yyyy mm dd  Who               Description
-   ----------  ----------------  ----------------------------------------------------
-   2023/08/20  JavaDan           Initial Module Creation...
-</pre>
+ * <p><pre>
+ *  yyyy mm dd  Who               Description
+ *  ----------  ----------------  ----------------------------------------------------
+ *  2023/08/20  JavaDan           Initial Module Creation...
+ * </pre>
  *
  */
 @RestController
@@ -36,10 +37,12 @@ public class LandingPadController {
      */
     @RequestMapping("/get-data")
     public String serviceGetData() {
-        String responseStr;
+        String      responseStr;
+        HeavyLifter heavyLifter = new HeavyLifter();
 
-        responseStr = " LandingPadController : get-data ";
+        responseStr = heavyLifter.getData();
 
+//      responseStr = " LandingPadController : get-data ";
         // Return
         return( responseStr );
     }
@@ -51,11 +54,13 @@ public class LandingPadController {
      */
     @RequestMapping("/get-image")
     public String serviceGetImage() {
-        String responseStr;
+        String      responseStr;
+        HeavyLifter heavyLifter = new HeavyLifter();
 
-        responseStr = " LandingPadController : get-image ";
-        System.out.println( responseStr );
+        responseStr = heavyLifter.getImage();
 
+//      responseStr = " LandingPadController : get-image ";
+//      System.out.println( responseStr );
         // Return
         return( responseStr );
     }
@@ -67,11 +72,13 @@ public class LandingPadController {
      */
     @RequestMapping("/get-info")
     public String serviceGetInfo() {
-        String responseStr;
+        String      responseStr;
+        HeavyLifter heavyLifter = new HeavyLifter();
 
-        responseStr = " LandingPadController : get-info ";
-        System.out.println( responseStr );
+        responseStr = heavyLifter.getInfo();
 
+//      responseStr = " LandingPadController : get-info ";
+//      System.out.println( responseStr );
         // Return
         return( responseStr );
     }
