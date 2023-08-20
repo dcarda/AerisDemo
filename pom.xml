@@ -9,10 +9,10 @@
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.cardatechnologies</groupId>
-    <artifactId>sbexample</artifactId>
+    <groupId>com.aeris.test</groupId>
+    <artifactId>aerisdemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sbexample</name>
+    <name>aerisdemo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -33,6 +33,9 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--        https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html    -->
+
+        <!-- Test Dependencies   ····················································· -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -45,13 +48,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--        https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html    -->
-
     </dependencies>
 
     <build>
-
+        <finalName>AerisDemoProgram</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

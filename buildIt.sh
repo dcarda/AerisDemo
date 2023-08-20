@@ -30,6 +30,50 @@ startDir=$(pwd)
 begin=$(date +"%s")
 startingTime=$(date +"%D %T.%3N")
 
+
+#===  FUNCTION   ================================================
+#         Name:  build_DockerArtifact()
+#  --------------------------------------------------------------
+#  Description:  This will build the Docker container.
+#   Parameters:  None
+#      Returns:  None
+#================================================================
+function build_DockerArtifact() {
+
+    echo
+    echo
+    echo
+
+    # =======================================================================
+    #  Build Docker container
+
+    echo "-----------------------------------------------------------------------"
+    echo
+    echo "Y" | docker system prune -a
+
+    docker build -t codewarrior23/personal-repository:AerisDemo .
+
+    docker images
+
+
+#    mvn     \
+#      clean \
+#      package
+#
+#    # Check results.
+#    if [ $? -ne 0 ]; then
+#        echo
+#        echo "Build Failure: The application build has failed for some reason."
+#        terminationAbnormal
+#    fi
+
+    # Display information about the artifact.
+    #  display_ArtifactInformation
+} # ---  End Function build_DockerArtifact()
+
+
+
+
 #===  FUNCTION   ================================================
 #         Name:  build_JarArtifact()
 #  --------------------------------------------------------------
@@ -371,8 +415,10 @@ if [ $# -eq 0 ]; then
     # Build Main EAR Artifact
     build_JarArtifact
 
-    # End the program
-    terminationNormal
+    build_DockerArtifact
+
+    docker run -p 8080:8080  codewarrior23/personal-repository:AerisDemo
+
 else
     # =====================================================================
     #  Well, looks like they want to do something specific.
