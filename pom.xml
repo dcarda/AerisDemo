@@ -39,48 +39,41 @@
         <!-- Miscellaneous Plugins                                                 -->
         <version.jar.plugin>3.3.0</version.jar.plugin>
         <version.netcdfJavaVersion>5.2.0</version.netcdfJavaVersion>
+        <version.spring.libraries>2.3.0.RELEASE</version.spring.libraries>
+        <version.ucar>5.5.3</version.ucar>
 
     </properties>
 
-    <!--    https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html-->
-    <repositories>
-        <repository>
-            <id>unidata-all</id>
-            <name>Unidata All</name>
-            <url>https://artifacts.unidata.ucar.edu/repository/unidata-all/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>2.3.0.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.3.0.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-            <version>2.3.0.RELEASE</version>
-        </dependency>
 
         <!--        https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html    -->
         <dependency>
             <groupId>edu.ucar</groupId>
             <artifactId>cdm-core</artifactId>
-            <version>5.5.3</version>
+            <version>${version.ucar}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>${version.spring.libraries}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${version.spring.libraries}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${version.spring.libraries}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Test Dependencies   ····················································· -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.3.0.RELEASE</version>
+            <version>${version.spring.libraries}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -90,6 +83,15 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <!--    https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html-->
+    <repositories>
+        <repository>
+            <id>unidata-all</id>
+            <name>Unidata All</name>
+            <url>https://artifacts.unidata.ucar.edu/repository/unidata-all/</url>
+        </repository>
+    </repositories>
 
     <build>
         <finalName>AerisDemoProgram</finalName>
@@ -234,7 +236,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.0.RELEASE</version>
+                <version>${version.spring.libraries}</version>
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
