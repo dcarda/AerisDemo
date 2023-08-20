@@ -280,7 +280,7 @@ function display_TaskChoices() {
         echo "     ${0##*/}  resolve       <-- Will try and resolve Maven dependencies"
         echo "     ${0##*/}  tree          <-- Displays a Maven dependency tree"
         echo "     ${0##*/}  info          <-- Show information about the artifact"
-        echo "     ${0##*/}  noTests       <-- Build, but don't run JUnit tests"
+        echo "     ${0##*/}  launch        <-- Launch the NetCDF viewer"
     fi
 } # ---  End Function display_TaskChoices()
 
@@ -434,6 +434,12 @@ else
 
     elif [ $1 == "resolve" ]; then
         resolve_dependencies
+        # End the program
+        terminationNormal
+
+    elif [ $1 == "launch" ]; then
+        java -Xmx1g -jar ./src/tools/toolsUI-5.5.3.jar
+
         # End the program
         terminationNormal
 
