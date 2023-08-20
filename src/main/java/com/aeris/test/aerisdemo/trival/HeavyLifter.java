@@ -1,18 +1,18 @@
-/* ---------------------------------------------------------------------------------------
+/*---------------------------------------------------------------------------------------
  * Class:  com.aeris.test.aerisdemo.trival.HeavyLifter.java
  * Date:   2023/08/20
  * ---------------------------------------------------------------------------------------
- *
- * Copyright, (c) 2020 - Carda Technologies, LLC
- * All rights reserved.
- */
-
-/*---------------------------------------------------------------------------------------
-* Class:  com.aeris.test.aerisdemo.trival.HeavyLifter.java
-* Date:   2023/08/20
-* ---------------------------------------------------------------------------------------
  */
 package com.aeris.test.aerisdemo.trival;
+
+//~--- JDK imports ------------------------------------------------------------
+
+import java.io.IOException;
+
+//~--- non-JDK imports --------------------------------------------------------
+
+import ucar.nc2.NetcdfFile;
+import ucar.nc2.NetcdfFiles;
 
 /**
  * Package:    com.aeris.test.aerisdemo.trival
@@ -22,11 +22,11 @@ package com.aeris.test.aerisdemo.trival;
  * @author     Daniel Carda
  *
  * Maintenance History:
-  <p><pre>
-    yyyy mm dd  Who               Description
-    ----------  ----------------  ----------------------------------------------------
-    2023/08/20  JavaDan           Initial Module Creation...
-  </pre>
+ * <p><pre>
+ *   yyyy mm dd  Who               Description
+ *   ----------  ----------------  ----------------------------------------------------
+ *   2023/08/20  JavaDan           Initial Module Creation...
+ * </pre>
  *
  */
 public class HeavyLifter {
@@ -65,9 +65,10 @@ public class HeavyLifter {
      *        The Z-Index value.
      *
      * @return String
-
+     *
      */
-    public String getImage(String timeIndex, String zIndex) {
+    public String getImage( String timeIndex,
+                            String zIndex ) {
         String returnStr;
 
         // Diagnostic:  Print out the values.
@@ -87,10 +88,20 @@ public class HeavyLifter {
      * @return String
      */
     public String getInfo() {
-        String returnStr;
+        String returnStr = null;
 
         //
-        returnStr = "   HeavyLifter : getInfo";
+        try(NetcdfFile ncfile = NetcdfFiles.open( "/concentration.timeseries.nc" )) {
+
+            // Load up the return string
+            returnStr = ncfile.getDetailInfo();
+        }
+        catch( IOException ioe ) {
+
+            // Handle less-cool exceptions here
+            // logger("Problem reading NetCDF file");
+            System.out.println( "bad error" );
+        }
 
         // Return the response
         return( returnStr );
@@ -101,4 +112,5 @@ public class HeavyLifter {
  * Class:  com.aeris.test.aerisdemo.trival.HeavyLifter.java
  * Date:   2023/08/20
  * --------------------------------------------------------------------------------------- */
+
 

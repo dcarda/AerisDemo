@@ -101,7 +101,7 @@ function build_JarArtifact() {
     fi
 
     # Display information about the artifact.
-    display_ArtifactInformation
+    #  display_ArtifactInformation
 } # ---  End Function build_JarArtifact()
 
 #===  FUNCTION   ================================================
