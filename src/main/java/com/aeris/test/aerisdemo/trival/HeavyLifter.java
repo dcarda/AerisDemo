@@ -43,16 +43,29 @@ public class HeavyLifter {
      */
     public String getData( String timeIndex,
                            String zIndex ) {
-        String returnStr;
+        String returnStr = null;
 
         // Diagnostic:  Print out the values.
         System.out.println( "getData : timeIndex=" + timeIndex );
         System.out.println( "getData : zIndex=" + zIndex );
 
-        // Return the results
-        returnStr = "   HeavyLifter : getData";
+        //
+        try(NetcdfFile ncfile = NetcdfFiles.open( "/concentration.timeseries.nc" )) {
 
-        // Return the response
+            returnStr = "{\n" +
+                    "  \"X-Data\": \"22.44\",\n" +
+                    "  \"Y-Data\": \"88.88888\",\n" +
+                    "  \"CONC-data\": \"3.14\",\n" +
+                    "}";
+        }
+        catch( IOException ioe ) {
+
+            // Handle less-cool exceptions here
+            // logger("Problem reading NetCDF file");
+            System.out.println( "bad error" );
+        }
+
+        // Return the results
         return( returnStr );
     }
 

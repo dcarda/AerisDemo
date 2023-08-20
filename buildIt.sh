@@ -272,11 +272,10 @@ function display_TaskChoices() {
     echo "-----------------------------------------------------------------------"
     echo " Task Selection"
     echo
-    if [ $1 == "--help" ]; then
-        echo "     ${0##*/}                <-- Build And Run Tests <default>"
+    if [ $1 == "help" ]; then
+        echo "     ${0##*/}                <-- Build And Run Docker container<default>"
+        echo "  "
         echo "     ${0##*/}  clean         <-- Deep Clean All Artifacts"
-        echo "     ${0##*/}  site          <-- Build Maven Site Reports"
-
         echo "     ${0##*/}  resolve       <-- Will try and resolve Maven dependencies"
         echo "     ${0##*/}  tree          <-- Displays a Maven dependency tree"
         echo "     ${0##*/}  info          <-- Show information about the artifact"
@@ -423,7 +422,7 @@ else
     # =====================================================================
     #  Well, looks like they want to do something specific.
 
-    if [ $1 == "--help" ]; then
+    if [ $1 == "help" ]; then
         display_TaskChoices $1
 
     elif [ $1 == "clean" ]; then
