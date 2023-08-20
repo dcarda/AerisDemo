@@ -41,6 +41,15 @@
 
     </properties>
 
+    <!--    https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html-->
+    <repositories>
+        <repository>
+            <id>unidata-all</id>
+            <name>Unidata All</name>
+            <url>https://artifacts.unidata.ucar.edu/repository/unidata-all/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,6 +64,11 @@
         </dependency>
 
         <!--        https://docs.unidata.ucar.edu/netcdf-java/current/userguide/using_netcdf_java_artifacts.html    -->
+        <dependency>
+            <groupId>edu.ucar</groupId>
+            <artifactId>cdm-core</artifactId>
+            <version>5.5.3</version>
+        </dependency>
 
         <!-- Test Dependencies   ····················································· -->
         <dependency>
